@@ -1,0 +1,44 @@
+infos: [
+    connectorId: "dsdqsdqs"
+    name: "MyConnector"
+    type: API
+    price: g1
+    isTokenised: true
+    [{
+        name: "token1"
+        type: Text
+        description: "Token description"
+        isRequired: true
+        checker: true
+        isPublic: true
+        options: ["option1", "option2"] }
+    ]
+    [ {
+        name: "token2"
+        type: Multichoice
+        description: "Token description"
+        isRequired: true
+        checker: false
+        options: ["option1", "option2", "option3"]
+    }]
+]
+
+mapping: [ 
+    {
+        name: "field1"
+        type: Text
+        description: "Field 1 description"
+        isRequired: false
+        checker: false
+        isPublic: true
+        options: ["option1", "option2"] }
+     	output:"outPut1"
+    {
+        name: "field2"
+        type: Multichoice
+        description: "Field 2 description"
+        isRequired: true
+        checker: true
+        options: ["option1", "option2", "option3"]}
+     	output:"outPut2"
+]

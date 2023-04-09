@@ -1,0 +1,59 @@
+grammar beetween.com.mp.connector.generator.ConnectorGenerator with org.eclipse.xtext.common.Terminals
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate connectorGenerator "http://www.com.beetween/mp/connector/generator/ConnectorGenerator"
+
+Domainmodel:
+    (connector=Connector)
+    ;
+     
+Connector:
+	 'infos' ':' '[' infos=ConnectorInfos ']'
+	 'mapping' ':' '[' mapping+=FieldMaper+']'
+;
+
+	ConnectorInfos:
+		'connectorId' ':' connectorId=STRING 
+		'name' ':' connectorName=STRING 
+		'type' ':'type=ConnectorType
+		'price' ':'price=Price 
+		tokenInfos=TokenInfos
+;
+
+TokenInfos:
+	'isTokenised' ':' isTokenised=Boolean ('[' tokenFields+=FieldDef+']')* 
+;
+
+
+FieldMaper:
+	def=FieldDef 'output' ':' outPut=STRING
+;
+
+
+FieldDef:
+	'{'
+		'name' ':' id=STRING
+		'type' ':' type=FieldType
+		'description' ':' description=STRING
+		'isRequired' ':' required=Boolean
+		('checker' ':' checker=Boolean)?
+		('isPublic' ':' public=Boolean)?
+		('options' ':''[' (options+=STRING ',')* (options+=STRING ']') )?
+	'}'
+;
+
+enum ConnectorType:
+	FEED | API
+;
+
+enum FieldType:
+	Multichoice | Text | Date | Integer | Password | Bool
+;
+
+enum Price:
+	g1 | g2 | p1 | p2 
+;
+
+enum Boolean : true | false;
+
+    

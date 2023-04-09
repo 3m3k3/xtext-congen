@@ -1,0 +1,45 @@
+grammar beetween.com.mp.connector.generator.ConnectorGenerator with org.eclipse.xtext.common.Terminals
+
+generate connectorGenerator "http://www.com.beetween/mp/connector/generator/ConnectorGenerator"
+
+Domainmodel:
+    (connectors+=Connector)*
+    ;
+     
+Type:
+    DataType | Entity;
+ 
+DataType:
+    'datatype' name=ID;
+ 
+Entity:
+    'entity' name=ID ('extends' superType=[Entity])? '{'
+        (features+=Feature)*
+    '}';
+ 
+Feature:	
+    (many?='many')? name=ID ':' type=[Type];
+    
+Connector:
+	connectorId=ID name=ID class=Type (imports+=Import)* (medatetadas+=Metadata)* (datas+=Data)* (extends+=Extend)*
+;
+
+Import:
+	'import' DataType
+;
+
+Extend:
+	'extend' DataType
+;
+
+Data:
+	'Data'Todo 
+;
+
+Metadata:
+	 'Metadata' Todo
+;
+
+Todo:
+	'Todo'
+;    
